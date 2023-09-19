@@ -262,6 +262,7 @@ function App() {
           {data?.map((product) => {
             return (
               <Card
+                key={product.id}
                 id={product.id}
                 title={product.name}
                 footer={() => footer(product.price, product.inCart)}
@@ -286,7 +287,7 @@ function App() {
           {dataInCart?.length === 0 && <span>Your cart is empty</span>}
           {dataInCart?.map((product) => {
             return (
-              <div id={product.id} className="item-in-cart">
+              <div key={product.id} id={product.id} className="item-in-cart">
                 <div
                   className="circle-cart"
                   style={{ background: `${product.color}` }}
