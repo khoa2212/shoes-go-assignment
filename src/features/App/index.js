@@ -17,7 +17,6 @@ import {
 } from "../../apis/product.api";
 
 function App() {
-
   // const [ total, setTotal ] = useState(0);
 
   const { data: dataProduct, refetch: refetchProduct } = useQuery(
@@ -38,7 +37,7 @@ function App() {
 
   const total = useMemo(() => {
     return dataProductInCart?.data?.reduce(
-      (sum, product) => sum + ((product?.price ?? 0) * product?.count),
+      (sum, product) => sum + (product?.price ?? 0) * product?.count,
       0
     );
   }, [dataProductInCart?.data]);
@@ -102,7 +101,7 @@ function App() {
 
   const footer = (price, inCart, product) => (
     <>
-      <div className="flex footer-style-card">
+      <div className="footer-style-card">
         <h2>${price}</h2>
         {!inCart ? (
           <Button
@@ -113,7 +112,7 @@ function App() {
         ) : (
           <Button
             icon={
-              <img style={{ height: "40px" }} src={checkIcon} alt="check" />
+              <img className="icon-check-style" src={checkIcon} alt="check" />
             }
             className="already-btn-add-to-cart"
           />
@@ -138,9 +137,9 @@ function App() {
                   footer(product?.price, product?.inCart, product?.id)
                 }
                 header={() => header(product?.image, product?.color)}
-                className="w-25rem custom-card"
+                className="custom-card"
               >
-                <p className="m-0">{product?.description}</p>
+                <p>{product?.description}</p>
               </Card>
             );
           })}
@@ -150,7 +149,7 @@ function App() {
       {/* seccond card */}
       <div className="hide-scrollbar-card">
         <img className="nike-img" src={nike} alt="nike" />
-        <div className="flex justify-content-between">
+        <div className="title-cart">
           <h1>Your cart</h1>
           <h1>${total?.toFixed(2)}</h1>
         </div>
@@ -176,7 +175,7 @@ function App() {
                       <Button
                         icon={
                           <img
-                            style={{ height: "15px", width: "15px" }}
+                            className="icon-minus-plus-style"
                             src={minus}
                             alt="minus"
                           />
@@ -184,19 +183,11 @@ function App() {
                         className="btn-calculate"
                         onClick={() => onChangQuantity(product?.id, false)}
                       />
-                      <span
-                        style={{
-                          fontSize: "20px",
-                          marginLeft: "10px",
-                          marginRight: "10px",
-                        }}
-                      >
-                        {product?.count}
-                      </span>
+                      <span className="count-text-style">{product?.count}</span>
                       <Button
                         icon={
                           <img
-                            style={{ height: "15px", width: "15px" }}
+                            className="icon-minus-plus-style"
                             src={plus}
                             alt="plus"
                           />
@@ -210,7 +201,7 @@ function App() {
                       <Button
                         icon={
                           <img
-                            style={{ height: "17px", width: "17px" }}
+                            className="icon-trash-style"
                             src={trash}
                             alt="trash"
                           />
